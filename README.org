@@ -1,0 +1,135 @@
+#+TITLE: LEkonIS
+#+AUTHOR: Josef Pospíšil
+#+DATE: <2017-11-21 út>
+#+LANGUAGE: cs
+#+OPTIONS: toc:2
+
+* Obecné
+
+Lesní ekonomický informační systém (zkráceně LEkonIS) je webová aplikace pro
+sbírání, ukládání a zpracování informací o lesních závodech a jejich
+hospodaření. Vytváří se hlavně pro potřeby habilitační práce Ing. Heleny
+Čermákové Ph.D. z Provozně ekonomické fakulty České zemědělské univerzity
+v Praze. Aplikace je vytvářena pouze ve fázi prototypu, či jako Proof of Concept.
+
+* Požadované funkce
+
+Aplikace musí plnit tyto funkce
+
+** Sběr dat
+
+Jako první funkčně i z vývojářského pohledu existuje část pro vstupy.
+
+*** Sběr interních dotazníků
+
+Návrh těchto dotazníků je součástí habilitační práce řešitelky. Aplikace je
+pouze převede do elektronické podoby a přidá jejich ukládání. Dotazníky bude
+vyplňovat vždy administrátor společně s dotazovaným.
+
+**** Úvodní stránka
+
+Uvodní stránka bude obsahovat výpis všech již vyplněných dotazníků pro
+administrátora systému. Na této stránce bude mít administátor možnost začít nový
+dotazník, pokračovat v započatém či jej smazat. Také zde bude možnost vytvořit
+unikátní link pro dotazovaného, aby si mohl jím zadaná data prohlédnout později.
+
+**** Vytvoření dotazníku
+
+Administrátor začne vyplňovat nový dotazník s dotazovaným. Dotazník bude
+rozdělen na více částí, dělených na jednotlivé stránky. V dotazníku je možné
+se pohybovat mezi jeho jednotlivými částmi. Hlavní bude zadávání údajů podle
+odpovědí dotazovaného.
+
+**** Pokračování dotazníku
+
+Administrátor bude mít možnost pokračovat ve vyplňování dotazníku, který nebyl
+dokončen. Funkcionalita je stejná jako při vyplňování dotazníku nového.
+
+**** Smazání dotazníku
+
+Aministrátor bude mít možnost smazat vytvořený dotazník. Dotazník se pouze
+označí jako smazaný, ale jeho data budou nadále uložena v systému.
+
+**** Vytvoření 
+
+*** Sběr účetních výkazů
+
+Dotazníky budou obsahovat standartní údaje získané účetní uzávěrkou v podniku.
+
+**** Přehled zadaných dotazníků
+
+Výpis všech již vyplněných dotazníků pro administrátora systému. V tomto
+přehledu má administátor možnost začít nový dotazník, pokračovat v započatém či
+jej smazat.
+
+**** Vytvoření dotazníku
+
+Administrátor začne vyplňovat nový dotazník s dotazovaným. V dotazníku je možné
+se pohybovat po jeho jednotlivých součástích a zadávat údaje podle odpovědí
+dotazovaného. 
+
+**** Pokračování dotazníku
+
+Administrátor doplňuje dotazník, který nebyl dokončen. Funkcionalita je stejná
+jako při vyplňování dotazníku nového.
+
+**** Smazání dotazníku
+
+Aministrátor má možnost smazat vytvořený dotazník.
+
+** Napojení systémy třetích stran
+
+Systém bude možno napojit na již existující zdroje dat ve státní správě. Tato
+napojení jsou velmi závislá na míře spolupráce zainteresovaných stran.
+
+*** Napojení na datový sklad ÚHUL
+
+*^ potřeba určit, které informace se budou přenášet ^*
+
+*** Napojení na Ministerstvo zemědělství
+
+*^ potřeba určit, které informace se budou přenášet ^*
+
+*** Napojení na Český statistický úřad
+
+*^ potřeba určit, které informace se budou přenášet ^*
+
+*** Iniciování přenosu
+
+Administrátor ručně iniciuje přenos informací mezi systémem a systémy třetích
+stran. 
+
+** Vytváření reportů
+
+Systém bude obsahovat výpisy zadaných informací s možnosti jejich filtrace a
+transformace. 
+
+* Produkt
+
+Tento projekt počítá nejen s vytvořením výše popsaného expertního systému, ale
+také s tvorbou webové prezentace jeho funkcionality a celé habilitační práce.
+
+Výsledný produkt se bude nacházet na internetové adrese http://lekonis.cz.
+
+Veškerá dokumentace a kód projektu bude uložen ve službě [[https://github.com][GitHub]].
+ 
+ *^ doplnit přesnou adresu ^*
+
+* Participanté a bezpečnost
+
+** Veřejnost
+
+Veřejně přístupná část nebude obsahovat žádnou autentifikaci.
+
+** Administrátor
+
+Administrátor systému se bude muset autentifikovat, aby mohl systém začít
+používat. Pro autentifikaci se použije služba třetí strany[[https://auth0.com][ Auth0]]. V sytému se
+bude udržovat pouze vazba na uživatele z této služby.
+
+** Dotazovaný
+
+Dotazovaný uživatel nebude mít v systému žádná práva, nicméně je možné mu
+přidělit unikátní odkaz na kterém bude mít možnost si jím zadaný dotazník
+prohlédnout po jeho vyplnění. Informace o dotazovaném bude součástí vyplněných
+dotazníků.

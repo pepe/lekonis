@@ -1,0 +1,3 @@
+{:require  [lekonis.app]
+ :init-fns [lekonis.app/init]
+ :compiler-options {:asset-path "js/app.out"}}

@@ -1,0 +1,149 @@
+:root {
+    --mdc-theme-primary: #2e7d32;
+    --mdc-theme-primary-light: #81c784;
+}
+
+body {
+    margin: 0;
+}
+
+main {
+    width: 100%;
+    margin: 1rem;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    min-height: 100%;
+    width: 100%;
+}
+
+#toolbar a {
+    text-decoration: none;
+    color: var(--mdc-theme-text-primary-on-primary);
+}
+
+#toolbar .icons {
+    display: flex;
+    width: 5rem;
+    justify-content: space-around;
+    margin: 0 1rem 0;
+}
+
+#drawer {
+    height: 100vh;
+}
+
+div.cards {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: left;
+    justify-content: left;
+}
+
+div.cards > div {
+    margin: 0.5rem 1rem 0.5rem 0;
+    min-width: 30%;
+}
+
+table {
+    margin: 2rem 10% 0;
+    width: 80%;
+}
+
+td.center {
+    text-align: center;
+}
+
+td.right {
+    text-align: right;
+}
+
+td.actions {
+    text-align: center;
+    width: 16rem;
+}
+
+nav.links {
+    margin: 2rem 10% 0;
+    width: 80%;
+    text-align: right;
+}
+
+div.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 1rem;
+}
+
+div.section-head nav.links {
+    margin: 0;
+    width: auto;
+    text-align: none;
+}
+
+
+div.notice {
+    padding: 1rem;
+}
+
+div.long {
+    width: 50rem;
+}
+
+div.long div {
+    width: 100%;
+}
+
+.status.valid {
+    color: var(--mdc-theme-primary);
+}
+.status.suspended {
+    color: #ff7043;
+}
+.status.terminated {
+    color: var(--mdc-theme-secondary-dark);
+}
+
+th.supplier {
+    text-align: right;
+    cursor: pointer;
+    padding-right: 2rem;
+}
+div.info {
+    position: absolute;
+    z-index: 10;
+    background: white;
+    padding: 2rem;
+    opacity: 0.9;
+    border: 1px solid var(--mdc-theme-primary-light);
+}
+
+div.info div {
+    padding: 0.25rem;
+}
+
+div.full-size {
+    width: 100%;
+    display: flex;
+
+}
+
+div.full-size .mdc-form-field {
+    margin-right: 1rem;
+}
+
+div.full-size .mdc-form-field, div.full-size .mdc-form-field .mdc-text-field {
+    width: 100%;
+}
+
+div.links {
+    display: flex;
+    align-content: flex-end;
+    margin-top: 2rem;
+}
