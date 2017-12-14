@@ -1,4 +1,7 @@
 /target
 /.nrepl-port
 /out
+/README.tex
+/README.pdf
+/target.zip
 .DS_Store

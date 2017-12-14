@@ -42,43 +42,130 @@
        (mdcc/icon-button {} "print")
        (mdcc/icon-button {} "account_circle")]]]))
 
+(rum/defc fill-comp < rum/reactive [store]
+  (let [state           (utils/get-state store)
+        step            (utils/get-from state :ui/step)
+        subject-types   (utils/get-from state :data/subject-types)
+        business-types  (utils/get-from state :data/business-types)
+        ownership-types (utils/get-from state :data/ownership-types)]
+    [:section#fill-questionnaire
+     [:div.section-head
+      [mdc/typo-display-3 "Dotazník"]
+      [:div
+       (mdcc/button {:on-click #(events/prev-step store) :disabled (< step 2)} "Předchozí stránka")
+       (mdcc/button {:on-click #(events/next-step store) :disabled (> step 2)} "Následující stránka")
+       (mdcc/button {:on-click #(events/set-ui-state store nil)} "Ukončit vyplňování")]]
+     [:form.questionnaire
+      {:class (str "step-" step)}
+      [:section#business
+       [mdc/typo-display-2 "Podnikání"]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/title "IČ")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/title "Název organizace")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :person/full-name "Statutární zástupce")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         [mdc/select
+          [:option {:value ""} "Typ subjektu dle Obchodního rejstříku"]
+          (for [{:subject-type/keys [id title]} subject-types]
+            [:option {:key id :value id} title])]]
+        (mdcc/button {} [mdc/icon "info"])]
+       [:div.full-size
+        [mdc/form-field
+         [mdc/select
+          [:option {:value ""} "Typ podnikání"]
+          (for [{:business-type/keys [id title]} business-types]
+            [:option {:key id :value id} title])]]
+        (mdcc/button {} [mdc/icon "info"])]
+       [:div.full-size
+        [mdc/form-field
+         [mdc/select
+          [:option {:value ""} "Typ vlastnictví"]
+          (for [{:ownership-type/keys [id title]} ownership-types]
+            [:option {:key id :value id} title])]]
+        (mdcc/button {} [mdc/icon "info"])]
+       [:div.full-size
+        [mdc/form-field
+         [mdc/select
+          {:id :organization/vat-payer}
+          [:option {:value ""} "Plátce DPH"]
+          [:option {:value "yes"} "Ano"]
+          [:option {:value "no"} "Ne"]]]
+        (mdcc/button {} [mdc/icon "info"])]]
+      [:section#contact
+       [mdc/typo-display-2 "Kontaktní údaje"]
+       [mdc/typo-display-1 "Adresa"]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :address/street "Ulice a číslo popisné")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :address/place "Sídlo")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :address/zip "PSČ")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [mdc/typo-display-1 "Kontakt"]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :contact/phone "Telefon")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :contact/fax "Fax")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :contact/e-mail "E-mail")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :contact/e-mail "Jiné")
+         (mdcc/button {} [mdc/icon "info"])]]]
+      [:section#area
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "Rozloha na které hospodaří (ha)")
+         (mdcc/button {} [mdc/icon "info"])]]]]]))
 
 (rum/defc questionnaires < rum/reactive [store]
   (let [state          (utils/get-state store)
         ui-state       (utils/get-from state :ui/state)
         questionnaires (utils/get-from state :data/questionnaires)]
-    (js/console.log ui-state)
     (if (= ui-state :fill/questionnaire)
-      [:section#fill-questionnaire
-       [:div.section-head
-        [mdc/typo-display-3 "Vyplňování dotazníku"]
-        (mdcc/button {:on-click #(events/set-ui-state store nil)} "Ukončit vyplňování")]
-       [:form
-        [:div.full-size
-         [mdc/form-field
-          (mdcc/text-field
-           {}
-           :organization/title "Název organizace")
-          (mdcc/button {} [mdc/icon "info"])]]
-        [:div.full-size
-         [mdc/form-field
-          (mdcc/text-field
-           {}
-           :person/full-name "Jméno dotazovaného")
-          (mdcc/button {} [mdc/icon "info"])]]
-        [:div.full-size
-         [mdc/form-field
-          (mdcc/text-field
-           {}
-           :organization/area "Rozloha na které hospodaří (ha)")
-          (mdcc/button {} [mdc/icon "info"])]]
-        [:div.links
-         [mdc/form-field
-          (mdcc/button {:disabled true} "Předchozí stránka")]
-         [mdc/form-field
-          (mdcc/button {} "Následující stránka")]
-         [mdc/form-field
-          (mdcc/button {:on-click #(events/set-ui-state store nil)} "Ukončit vyplňování")]]]]
+      (fill-comp store)
       [:section#questionnaires
        [:div.section-head
         [mdc/typo-display-3 "Dotazníky"]

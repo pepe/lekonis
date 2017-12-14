@@ -78,7 +78,7 @@ div.section-head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding-top: 1rem;
+    padding: 1rem 0;
 }
 
 div.section-head nav.links {
@@ -138,12 +138,33 @@ div.full-size .mdc-form-field {
     margin-right: 1rem;
 }
 
-div.full-size .mdc-form-field, div.full-size .mdc-form-field .mdc-text-field {
+div.full-size .mdc-form-field, div.full-size .mdc-form-field .mdc-text-field,
+div.full-size .mdc-form-field .mdc-select {
+    margin: 0.5rem 0;
     width: 100%;
 }
 
 div.links {
     display: flex;
-    align-content: flex-end;
+    justify-content: flex-end;
     margin-top: 2rem;
+}
+
+form.questionnaire {
+    width: calc(100vw - 240px - 2rem);
+    display: flex;
+    overflow-x: hidden;
+}
+
+form.questionnaire section {
+    min-width: calc(100vw - 240px - 2rem);
+    transition: transform 250ms ease-out;
+}
+
+form.questionnaire.step-2 section {
+    transform: translateX(calc(240px + 2rem - 100vw));
+}
+
+form.questionnaire.step-3 section {
+    transform: translateX(calc(2 * (240px + 2rem - 100vw)));
 }

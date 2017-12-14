@@ -24,3 +24,19 @@
 
 (defn set-inputs [store inputs]
   (ptk/emit! store (->SetInputs inputs)))
+
+
+(defrecord NextStep []
+  ptk/UpdateEvent
+  (update [_ state] (update state :ui/step inc)))
+
+(defn next-step [store]
+  (ptk/emit! store (->NextStep)))
+
+
+(defrecord PrevStep []
+  ptk/UpdateEvent
+  (update [_ state] (update state :ui/step dec)))
+
+(defn prev-step [store]
+  (ptk/emit! store (->PrevStep)))
