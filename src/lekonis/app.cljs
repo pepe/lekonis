@@ -53,7 +53,7 @@
       [mdc/typo-display-3 "Dotazník"]
       [:div
        (mdcc/button {:on-click #(events/prev-step store) :disabled (< step 2)} "Předchozí stránka")
-       (mdcc/button {:on-click #(events/next-step store) :disabled (> step 2)} "Následující stránka")
+       (mdcc/button {:on-click #(events/next-step store) :disabled (> step 3)} "Následující stránka")
        (mdcc/button {:on-click #(events/set-ui-state store nil)} "Ukončit vyplňování")]]
      [:form.questionnaire
       {:class (str "step-" step)}
@@ -153,11 +153,78 @@
           :contact/e-mail "Jiné")
          (mdcc/button {} [mdc/icon "info"])]]]
       [:section#area
+       [mdc/typo-display-2 "Rozlohy"]
        [:div.full-size
         [mdc/form-field
          (mdcc/text-field
           {}
-          :organization/area "Rozloha na které hospodaří (ha)")
+          :organization/area "Celková rozloha vlastního lesa (ha)")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [:p.prefix "v tom"]
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "rozloha lesů ochranných (ha)")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [:p.prefix "v tom"]
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "rozloha lesů zvláštního určení (ha)")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [:p.prefix "v tom"]
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "rozloha lesů hospodářských (ha)")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [:p.prefix "z toho"]
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "rozloha lesů hospodářských (ha)")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "Celková rozloha lesa pronajatého třetímu subjektu (ha)")
+         (mdcc/button {} [mdc/icon "info"])]]]
+      [:section#other
+       [mdc/typo-display-2 "Ostatní?"]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "Kód LHC	")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "Daň z nemovitých věcí z lesních pozemků")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "Nájemné předepisované vlastníkem (tis. Kč)")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "Přírodní lesní oblasti přidělí ÚHUL?")
+         (mdcc/button {} [mdc/icon "info"])]]
+       [:div.full-size
+        [mdc/form-field
+         (mdcc/text-field
+          {}
+          :organization/area "Lesní typ přidělí ÚHUL?")
          (mdcc/button {} [mdc/icon "info"])]]]]]))
 
 (rum/defc questionnaires < rum/reactive [store]

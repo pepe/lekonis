@@ -131,7 +131,7 @@ div.info div {
 div.full-size {
     width: 100%;
     display: flex;
-
+    align-items: baseline;
 }
 
 div.full-size .mdc-form-field {
@@ -142,6 +142,10 @@ div.full-size .mdc-form-field, div.full-size .mdc-form-field .mdc-text-field,
 div.full-size .mdc-form-field .mdc-select {
     margin: 0.5rem 0;
     width: 100%;
+}
+
+div.full-size p.prefix {
+    width: 10%;
 }
 
 div.links {
@@ -167,4 +171,8 @@ form.questionnaire.step-2 section {
 
 form.questionnaire.step-3 section {
     transform: translateX(calc(2 * (240px + 2rem - 100vw)));
+}
+
+form.questionnaire.step-4 section {
+    transform: translateX(calc(3 * (240px + 2rem - 100vw)));
 }
