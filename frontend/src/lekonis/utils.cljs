@@ -29,3 +29,7 @@
   (.toLocaleDateString (js/Date. date)))
 
 
+(defn set-hash
+  "Sets browser window hash"
+  [new-hash]
+  (object/set (-> js/window .-location) "hash" new-hash))

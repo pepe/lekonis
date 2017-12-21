@@ -1,10 +1,12 @@
 (ns lekonis.app
   (:require [rum.core :as rum]
             [potok.core :as ptk]
+            [beicon.core :as rxt]
             [mdc-rum.core :as mdc]
             [mdc-rum.components :as mdcc]
             [cljsjs.material-components]
             [lekonis.utils :as utils]
+            [lekonis.auth :as auth]
             [lekonis.store :as store]
             [lekonis.events :as events]
             [lekonis.specs :as specs]))
@@ -291,4 +293,8 @@
 
 
 (defn init []
-  (rum/mount (page store/main) (. js/document (getElementById "container"))))
+  (let [hash (-> js/window .-location .-hash (subs 1 13))]
+    (cond
+      (= hash "access_token") (events/handle-login store/main)
+      (not (:auth/user @(rxt/to-atom store/main))) (auth/login))
+    (rum/mount (page store/main) (. js/document (getElementById "container")))))

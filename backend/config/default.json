@@ -5,5 +5,13 @@
   "paginate": {
     "default": 10,
     "max": 50
-  }
+  },
+  "jwt": {
+    "jwksRequestsPerMinute": 1,
+    "jwksUri": "https://lekonis.eu.auth0.com/.well-known/jwks.json",
+    "audience": "http://backend.lekonis:3030",
+    "issuer": "https://lekonis.eu.auth0.com/",
+    "algorithms": ["RS256"]
+  },
+  "nedb": "../data"
 }
