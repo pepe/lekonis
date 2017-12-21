@@ -1,8 +1,10 @@
 (ns lekonis.events
   (:require
    [potok.core :as ptk]
+   [beicon.core :as rxt]
    [lekonis.utils :as utils]
-   [lekonis.auth :as auth]))
+   [lekonis.auth :as auth]
+   [lekonis.users.model :as users.model]))
 
 
 (defrecord SetPage [page-id]
@@ -44,6 +46,20 @@
 (defn prev-step [store]
   (ptk/emit! store (->PrevStep)))
 
+(defrecord SetUser [data]
+  ptk/UpdateEvent
+  (update [_ state]
+    (js/console.log (js->clj data :keywordize-keys true))
+    (let [user (-> data (js->clj :keywordize-keys true) :data first)]
+      (assoc state
+             :auth/user user
+             :page/current :page/questionnaires))))
+
+(defrecord PopulateUser []
+  ptk/WatchEvent
+  (watch [_ state _]
+    (users.model/get-by-id (:auth/access-token state) (get-in state [:auth/payload :sub]) ->SetUser)))
+
 
 (defrecord SetLoggedIn [params]
   ptk/UpdateEvent
@@ -51,9 +67,11 @@
     (let [params       (js->clj params :keywordize-keys true)
           auth-payload (:idTokenPayload params)]
       (assoc state
-             :auth/user true
              :auth/access-token (:accessToken params)
              :auth/payload auth-payload)))
+  ptk/WatchEvent
+  (watch [_ state _]
+    (rxt/just (->PopulateUser)))
   ptk/EffectEvent
   (effect [_ _ _]
     (utils/set-hash "")))
@@ -66,11 +84,13 @@
 
 
 (defrecord HandleLogin []
+  ptk/UpdateEvent
+  (update [_ state]
+    (js/console.log "Handling")
+    (assoc state :page/current :page/loading))
   ptk/WatchEvent
   (watch [_ state _]
     (auth/parse-hash ->SetLoggedIn ->HandleError)))
 
 (defn handle-login [store  ]
   (ptk/emit! store (->HandleLogin  )))
-
-

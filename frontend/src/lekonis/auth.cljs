@@ -4,11 +4,6 @@
             [promesa.core :as pro]
             [lekonis.config :as config])) 
 
-(defonce ^:private ^:const scopes
-  (clojure.string/join
-   " " ["openid" "profile" "email"]))
-
-
 (defonce ^:private ^:const web
   (js/auth0.WebAuth. (clj->js {:domain       config/AUTH0_DOMAIN
                                :clientID     config/AUTH0_CLIENT_ID
@@ -16,7 +11,7 @@
                                :audience     config/BACKEND_URL
                                :responseType "id_token token"
                                :dict         "cs"
-                               :scope        scopes})))
+                               :scope        "openid"})))
 
 
 (defn login []

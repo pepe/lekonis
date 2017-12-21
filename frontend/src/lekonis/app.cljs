@@ -277,6 +277,9 @@
   [mdc/typo-display-3 "Přenosy"])
 
 
+(rum/defc loading []
+  [mdc/typo-display-1 "Načítám"])
+
 (rum/defc page < rum/reactive [store]
   (let [state        (utils/get-state store)
         current-page (utils/get-from state :page/current)]
@@ -286,6 +289,7 @@
      [:main
       mdc/adjust-fixed-toolbar
       (case current-page
+        :page/loading (loading)
         :page/questionnaires (questionnaires store)
         :page/accounting     (accounting store)
         :page/templates      (templates store)
